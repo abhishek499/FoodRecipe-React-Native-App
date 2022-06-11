@@ -3,12 +3,17 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
+import MealsNavigator from "./navigation/MealsNavigator";
+import { enableScreens } from "react-native-screens";
+
+enableScreens();
 
 const fetchFonts = () => {
   Font.loadAsync({
     "ps-regular": require("./assets/fonts/Product-Sans-Regular.ttf"),
     "ps-bold": require("./assets/fonts/Product-Sans-Bold.ttf"),
   });
+  console.log("loaded");
 };
 
 export default function App() {
@@ -19,15 +24,11 @@ export default function App() {
       <AppLoading
         startAsync={fetchFonts}
         onFinish={() => setFontLoaded(true)}
+        onError={(err) => console.log(err)}
       />
     );
   }
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+  return <MealsNavigator />;
 }
 
 const styles = StyleSheet.create({
